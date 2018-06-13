@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+
+
+	<!-- 静态文件直接由应用服务器容器处理不用springMVC处理 -->
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.jpg</url-pattern>
+		<url-pattern>*.jpeg</url-pattern>
+		<url-pattern>*.png</url-pattern>
+		<url-pattern>*.gif</url-pattern>
+		<url-pattern>*.js</url-pattern>
+		<url-pattern>*.css</url-pattern>
+		<url-pattern>*.swf</url-pattern>
+		<url-pattern>*.apk</url-pattern>
+		<url-pattern>*.mp3</url-pattern>
+		<url-pattern>*.mp4</url-pattern>
+		<url-pattern>*.ico</url-pattern>
+		<url-pattern>*.pdf</url-pattern>
+		<url-pattern>*.html</url-pattern>
+		<url-pattern>*.htm</url-pattern>
+		<url-pattern>*.vm</url-pattern>
+		<url-pattern>*.doc</url-pattern>
+		<url-pattern>*.docx</url-pattern>
+		<url-pattern>*.xls</url-pattern>
+		<url-pattern>*.xlsx</url-pattern>
+		<url-pattern>*.ppt</url-pattern>
+		<url-pattern>*.pptx</url-pattern>
+		<url-pattern>*.txt</url-pattern>
+		<!-- 多图片上传直访跨域xml -->
+		<url-pattern>*.xml</url-pattern>
+	</servlet-mapping>
+
+	<!-- spring配置的读取路径 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath*:/springXml/spring-*.xml,
+			classpath*:/springXml/*/spring-*.xml
+		</param-value>
+	</context-param>
+
+	<!-- spring 启动监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- 字符编码过滤 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 配置Shiro过滤器,先让Shiro过滤系统接收到的请求 -->
+	<!-- 这里filter-name必须对应applicationContext.xml中定义的<bean id="shiroFilter"/> -->
+	<!-- 使用[/*]匹配所有请求,保证所有的可控请求都经过Shiro的过滤 -->
+	<!-- 通常会将此filter-mapping放置到最前面(即其他filter-mapping前面),以保证它是过滤器链中第一个起作用的 -->
+	<filter>
+		<filter-name>shiroFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<!-- 该值缺省为false,表示生命周期由SpringApplicationContext管理,设置为true则表示由servlet container管理 -->
+			<param-name>targetFilterLifecycle</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>shiroFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 提交包含html内容的拦截器 -->
+	<filter>
+		<filter-name>xssFilter</filter-name>
+		<filter-class>com.platform.xss.XssFilter</filter-class>
+		<init-param>
+			<!--凡是提交包含html内容的请求都要写在这里，若有多个以逗号隔开 -->
+			<param-name>excludedPages</param-name>
+			<param-value>/topic/update,/topic/save,/goods/save,/goods/update</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>xssFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<!-- 配置log4j -->
+			<param-name>log4j</param-name>
+			<param-value>classpath*:log4j.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<!-- 404错误页面 -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/404.html</location>
+	</error-page>
+
+	<!-- session 超时时间最多30分钟 -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+</web-app>
