@@ -6,16 +6,7 @@
 		<artifactId>luckydeer-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>luckydeer-common</artifactId>
-	<name>luckydeer-common</name>
-	<description>公共模块</description>
-
-	<dependencies>
-		<dependency>
-			<groupId>cn.luckydeer</groupId>
-			<artifactId>luckydeer-model</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-	</dependencies>
-	
+	<artifactId>luckydeer-model</artifactId>
+	<name>luckydeer-model</name>
+	<description>数据模型</description>
 </project>
