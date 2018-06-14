@@ -34,12 +34,10 @@
 			implementationPackage="cn.luckydeer.dao.users.daoImpl" targetProject="target" />
 		<!-- 要生成哪些表 -->
 
-		<!-- 系统权限表 -->
-		<table tableName="sys_role" domainObjectName="SysRoleDo"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false">
-		</table>
+		<!-- 系统权限表 已生成 -->
+		<!-- <table tableName="sys_role" domainObjectName="SysRoleDo" enableCountByExample="false" 
+			enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" 
+			selectByExampleQueryId="false"> </table> -->
 
 	</context>
 </generatorConfiguration>
