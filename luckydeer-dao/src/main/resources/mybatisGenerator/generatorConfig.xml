@@ -39,5 +39,12 @@
 			enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" 
 			selectByExampleQueryId="false"> </table> -->
 
+		<table tableName="sys_user" domainObjectName="SysUserDo"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+
+
 	</context>
 </generatorConfiguration>
