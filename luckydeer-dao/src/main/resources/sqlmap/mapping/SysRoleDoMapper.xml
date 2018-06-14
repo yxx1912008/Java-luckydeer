@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.luckydeer.dao.users.daoImpl.SysRoleDao">
+	<resultMap id="BaseResultMap" type="cn.luckydeer.dao.users.dataobject.SysRoleDo">
+		<id column="role_id" property="roleId" jdbcType="BIGINT" />
+		<result column="role_name" property="roleName" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="create_user_id" property="createUserId"
+			jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="dept_id" property="deptId" jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		role_id, role_name, remark, create_user_id, create_time,
+		dept_id
+	</sql>
+
+	<select id="queryRoleIdList" resultType="java.lang.String"
+		parameterType="java.lang.String">
+		select role_id from sys_role where
+		create_user_id=#{createUserId,jdbcType=VARCHAR}
+	</select>
+
+
+
+</mapper>
