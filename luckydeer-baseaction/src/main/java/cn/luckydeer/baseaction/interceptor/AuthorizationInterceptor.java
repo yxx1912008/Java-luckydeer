@@ -8,8 +8,8 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import cn.luckydeer.baseaction.annotation.IgnoreAuth;
+import cn.luckydeer.baseaction.constant.UserDefaultConstant;
 import cn.luckydeer.baseaction.exception.TokenException;
-import cn.luckydeer.common.enums.HttpChannelType;
 import cn.luckydeer.common.enums.ViewShowEnums;
 
 /**
@@ -40,13 +40,15 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
         }
 
         /** 1.获取Token */
-        String token = request.getHeader(HttpChannelType.WEIXIN.getCode());
+        String token = request.getHeader(UserDefaultConstant.LOGIN_TOKEN_KEY);
 
         /** 2.如果Token获取失败  */
         if (StringUtils.isBlank(token)) {
-            throw new TokenException("Token获取失败,请重新登录", ViewShowEnums.ERROR_FAILED.getStatus());
+            throw new TokenException("您尚未登陆,请登录", ViewShowEnums.ERROR_FAILED.getStatus());
         }
-        
+
+        /** 3.查询token信息 */
+
         System.out.println("开始方法的验证");
         return super.preHandle(request, response, handler);
     }
