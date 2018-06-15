@@ -3,9 +3,6 @@ package cn.luckydeer.common.model;
 import java.io.Serializable;
 import java.util.Collection;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.util.CollectionUtils;
 
@@ -68,7 +65,7 @@ public class ResponseObj implements Serializable {
     * @param response
     * @return    
     */
-    public String toJson(HttpServletRequest request, HttpServletResponse response) {
+    public String toJson() {
         String resultJson = null;
         if (null == this.data || (data instanceof String && StringUtils.isBlank(data.toString()))
             || (data instanceof Collection && CollectionUtils.isEmpty((Collection<?>) data))) {
