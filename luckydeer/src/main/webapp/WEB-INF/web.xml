@@ -80,6 +80,7 @@
 	<servlet-mapping>
 		<servlet-name>dispatcherServlet</servlet-name>
 		<url-pattern>*.do</url-pattern>
+		<url-pattern>*.wx</url-pattern>
 	</servlet-mapping>
 	<!-- session 超时时间最多30分钟 -->
 	<session-config>
