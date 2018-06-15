@@ -17,6 +17,7 @@
 	<!-- 拦截器 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
+			<!-- 拦截后缀为 *.wx的请求 进行Token验证 -->
 			<mvc:mapping path="/**/*.wx" />
 			<bean class="cn.luckydeer.baseaction.interceptor.AuthorizationInterceptor"></bean>
 		</mvc:interceptor>
