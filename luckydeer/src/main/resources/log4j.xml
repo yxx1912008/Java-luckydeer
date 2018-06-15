@@ -15,6 +15,18 @@
 		</layout>
 	</appender>
 
+	<!-- [公共Appender] 汇总错误 -->
+	<appender name="ERROR-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="/windata/logs/luckydeer/common-error.log" />
+		<param name="append" value="true" />
+		<param name="encoding" value="UTF-8" />
+		<param name="threshold" value="error" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p (%c:%L)- %m%n" />
+		</layout>
+	</appender>
+
+
 	<!-- 日志后续有需要，可以继续添加 -->
 	<!-- 日志很重要，一定要梳理清楚才能方便调试 -->
 	<!-- SOA-LOG层日志文件 -->
@@ -27,6 +39,15 @@
 		</layout>
 	</appender>
 
+	<!-- rabbit-mq日志文件 -->
+	<appender name="APPENDER-RABBIT-MQ-LOG" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="/windata/logs/luckydeer/rabbitmq.log" />
+		<param name="append" value="true" />
+		<param name="encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p (%c:%L)- %m%n" />
+		</layout>
+	</appender>
 
 	<!-- 只监控登录会话 -->
 	<appender name="APPENDER-SESSION-LOGGER" class="org.apache.log4j.DailyRollingFileAppender">
@@ -70,6 +91,17 @@
 	</appender>
 
 
+	<logger name="ytx.org.apache.http" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="ERROR-APPENDER" />
+	</logger>
+
+	<logger name="TASK-LOG" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="ERROR-APPENDER" />
+	</logger>
+
+
 	<logger name="LUCKYDEER-NOTE-MANAGER" additivity="false">
 		<level value="INFO" />
 		<appender-ref ref="APPENDER-LUCKYDEER-DAL-MANAGER" />
@@ -78,11 +110,6 @@
 	<logger name="SOA-JAR-LOG" additivity="false">
 		<level value="INFO" />
 		<appender-ref ref="APPENDER-SOA-JAR-LOG" />
-	</logger>
-
-	<logger name="DAL-MONITOR-LOGGER">
-		<level value="INFO"></level>
-		<appender-ref ref="APPENDER-LUCKYDEER-DAL-MONITOR" />
 	</logger>
 
 

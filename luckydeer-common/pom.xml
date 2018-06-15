@@ -8,7 +8,7 @@
 	</parent>
 	<artifactId>luckydeer-common</artifactId>
 	<name>luckydeer-common</name>
-	<description>公共模块</description>
+
 
 	<dependencies>
 		<dependency>
@@ -17,5 +17,4 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
-	
 </project>

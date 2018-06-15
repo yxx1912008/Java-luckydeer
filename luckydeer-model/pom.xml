@@ -8,5 +8,4 @@
 	</parent>
 	<artifactId>luckydeer-model</artifactId>
 	<name>luckydeer-model</name>
-	<description>数据模型</description>
 </project>

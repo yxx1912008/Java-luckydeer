@@ -26,11 +26,9 @@
 		<setting name="defaultStatementTimeout" value="25000" />
 		<!-- 启用mybatis支持log4j <setting name="logImpl" value="LOG4J"/> -->
 	</settings>
-
+	
 	<!-- 数据库操作映射文件 -->
 	<mappers>
-		<!-- 系统权限表 -->
-		<mapper resource="sqlmap/mapping/SysRoleDoMapper.xml" />
+		<!-- <mapper resource="sqlmap/mapping/NoteInfoDoMapper.xml" /> -->
 	</mappers>
-
 </configuration>

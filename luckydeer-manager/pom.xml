@@ -8,8 +8,6 @@
 	</parent>
 	<artifactId>luckydeer-manager</artifactId>
 	<name>luckydeer-manager</name>
-	<description>管理层</description>
-
 	<dependencies>
 		<dependency>
 			<groupId>cn.luckydeer</groupId>

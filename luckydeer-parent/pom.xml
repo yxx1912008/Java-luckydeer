@@ -5,11 +5,12 @@
 	<artifactId>luckydeer-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>总控pom</name>
-	<description>总控模块</description>
+	<name>luckydeer-parent</name>
+	<description>总控pom</description>
 
 
-	<!-- 依赖库三方库的版本号 -->
+
+
 	<properties>
 		<spring.version>4.2.0.RELEASE</spring.version>
 		<!-- 权限验证框架 -->
@@ -372,5 +373,7 @@
 			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
 		</repository>
 	</repositories>
+
+
 
 </project>

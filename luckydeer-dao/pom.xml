@@ -8,7 +8,6 @@
 	</parent>
 	<artifactId>luckydeer-dao</artifactId>
 	<name>luckydeer-dao</name>
-	<description>数据库操作层</description>
 
 	<dependencies>
 		<dependency>
@@ -17,5 +16,4 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
-
 </project>

@@ -8,8 +8,6 @@
 	</parent>
 	<artifactId>luckydeer-baseaction</artifactId>
 	<name>luckydeer-baseaction</name>
-	<description>公共基础组件</description>
-
 	<dependencies>
 		<dependency>
 			<groupId>cn.luckydeer</groupId>
