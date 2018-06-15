@@ -3,12 +3,14 @@ package cn.luckydeer.common.model;
 import java.io.Serializable;
 import java.util.Collection;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.util.CollectionUtils;
 
 import cn.luckydeer.common.enums.ViewShowEnums;
-
-import com.alibaba.fastjson.JSON;
+import cn.luckydeer.common.utils.DomainUtils;
 
 /**
  * 
@@ -65,14 +67,59 @@ public class ResponseObj implements Serializable {
     * @param response
     * @return    
     */
-    public String toJson() {
+    public String toJson(HttpServletRequest request, HttpServletResponse response) {
+
+        // 设置跨域
+        DomainUtils.setAccessContrlAllowOrigin(request, response);
+        //如果客户端传入了callBack变量说明该请求是jsonp跨域请求，则将数据包装成jsonp所需格式返回
+        String callBackFunName = request.getParameter(ViewContants.JSONP_CALLBACK_FUN_NAME);
+
         String resultJson = null;
+
         if (null == this.data || (data instanceof String && StringUtils.isBlank(data.toString()))
             || (data instanceof Collection && CollectionUtils.isEmpty((Collection<?>) data))) {
             resultJson = getBlankDataJson();
+            if (StringUtils.isNotBlank(callBackFunName)) {
+                return callBackFunName + "(" + resultJson + ")";
+            }
             return resultJson;
         }
-        return JSON.toJSONString(this);
+
+        if (StringUtils.isNotBlank(callBackFunName)) {
+            return callBackFunName + "(" + GsonUtils.getGson().toJson(this) + ")";
+        }
+
+        return GsonUtils.getGson().toJson(this);
+    }
+
+    /** <p class="detail">
+    * 功能：web端data拼写的json
+    * </p>
+    * @author panwuhai
+    * @date 2016年4月18日 
+    * @param request
+    * @param response
+    * @return    
+    */
+    @Deprecated
+    public String toDataString(HttpServletRequest request, HttpServletResponse response) {
+        DomainUtils.setAccessContrlAllowOrigin(request, response);
+        if (null == this.data) {
+            this.data = "";
+        }
+        if (data instanceof String) {
+            if (StringUtils.isBlank(data.toString())) {
+                this.data = "";
+            }
+        }
+        String result = dataToString();
+        //如果客户端传入了callBack变量说明该请求是jsonp跨域请求，则将数据包装成jsonp所需格式返回
+        String callBackFunName = request.getParameter(ViewContants.JSONP_CALLBACK_FUN_NAME);
+        if (StringUtils.isNotBlank(callBackFunName)) {
+            return callBackFunName + "(" + result + ")";
+        }
+
+        return result;
     }
 
     /** <p class="detail">
@@ -84,7 +131,6 @@ public class ResponseObj implements Serializable {
     * @param response
     * @return    
     */
-    @SuppressWarnings("unused")
     private String dataToString() {
         StringBuilder builder = new StringBuilder("{\"status\":");
         builder.append(this.getStatus());
