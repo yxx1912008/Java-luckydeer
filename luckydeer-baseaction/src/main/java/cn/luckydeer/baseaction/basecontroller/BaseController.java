@@ -19,7 +19,7 @@ import cn.luckydeer.common.model.ResponseObj;
 
 /**
  * 基类Controller
- * 
+ * 建议所有的Controller继承此基类
  * @author yuanxx
  * @version $Id: BaseController.java, v 0.1 2018年6月15日 下午2:40:28 yuanxx Exp $
  */
