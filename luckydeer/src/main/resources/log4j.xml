@@ -61,8 +61,6 @@
 		</layout>
 	</appender>
 
-
-
 	<!-- Memcached日志 -->
 	<logger name="LUCKYDEER-MEMCACHED-LOG" additivity="false">
 		<level value="INFO" />
