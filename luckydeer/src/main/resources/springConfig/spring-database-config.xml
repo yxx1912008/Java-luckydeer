@@ -17,14 +17,15 @@
 		<value>file:../db/acaomeidb.properties</value> <value>file:../domain/domain.properties</value> 
 		tomcat目录: <value>file:${catalina.home}/db/acaomeidb.properties</value> <value>file:${catalina.home}/domain/domain.properties</value> -->
 
-	<bean id="propertyConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<!-- 最初是要类名填写 PropertyPlaceholderConfigurer类，后期为了全局使用properties变量，改为继承此类 -->
+	<bean id="propertyConfigurer" class="cn.luckydeer.common.utils.CustomizedProperty">
 		<!-- 多数据源配置 -->
 		<property name="ignoreUnresolvablePlaceholders" value="true" />
 		<property name="locations">
 			<list>
 				<value>file:${catalina.home}/db/luckydeer-db.properties</value>
-				<value>file:${catalina.home}/domain/luckydeerDomain.properties</value>
+				<value>file:${catalina.home}/domain/luckydeerDomain.properties
+				</value>
 			</list>
 		</property>
 	</bean>
