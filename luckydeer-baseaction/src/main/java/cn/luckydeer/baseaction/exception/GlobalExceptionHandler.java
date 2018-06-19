@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
     public String errorHandler(Exception ex) {
         logger.error("未处理的系统异常:", ex);
         return new ResponseObj(ViewShowEnums.ERROR_FAILED.getStatus(),
-            ViewShowEnums.ERROR_FAILED.getDetail()).toJson().toString();
+            ViewShowEnums.ERROR_FAILED.getDetail()).toString();
     }
 
     /**
@@ -42,7 +42,6 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ExceptionHandler(value = TokenException.class)
     public String handlerTokenException(TokenException exception) {
-        System.out.println("捕获异常");
         return new ResponseObj(ViewShowEnums.ERROR_FAILED.getStatus(), exception.getMsg())
             .toString();
     }

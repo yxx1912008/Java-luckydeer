@@ -49,14 +49,14 @@ public class BaseController {
         if (e instanceof BindException) {
             logger.error("参数绑定异常", e);
             return new ResponseObj(ViewShowEnums.ERROR_FAILED.getStatus(),
-                ViewShowEnums.ERROR_FAILED.getDetail()).toJson().toString();
+                ViewShowEnums.ERROR_FAILED.getDetail()).toJson(request, response);
         } else if (e instanceof UnauthorizedException) {
             logger.error("无访问权限", e);
             return new ResponseObj(ViewShowEnums.ERROR_FAILED.getStatus(),
-                ViewShowEnums.ERROR_FAILED.getDetail()).toJson().toString();
+                ViewShowEnums.ERROR_FAILED.getDetail()).toJson(request, response);
         }
         return new ResponseObj(ViewShowEnums.ERROR_FAILED.getStatus(),
-            ViewShowEnums.ERROR_FAILED.getDetail()).toJson().toString();
+            ViewShowEnums.ERROR_FAILED.getDetail()).toJson(request, response);
     }
 
     /**
@@ -68,10 +68,10 @@ public class BaseController {
     public String defaultException(Exception e) {
         if (e instanceof TokenException) {
             return new ResponseObj(ViewShowEnums.ERROR_FAILED.getStatus(),
-                ((TokenException) e).getMsg()).toJson().toString();
+                ((TokenException) e).getMsg()).toJson(request, response);
         }
         return new ResponseObj(ViewShowEnums.ERROR_FAILED.getStatus(),
-            ViewShowEnums.ERROR_FAILED.getDetail()).toJson().toString();
+            ViewShowEnums.ERROR_FAILED.getDetail()).toJson(request, response);
     }
 
     /**

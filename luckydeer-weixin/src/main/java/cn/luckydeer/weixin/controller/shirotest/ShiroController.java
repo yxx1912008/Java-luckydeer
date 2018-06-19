@@ -3,6 +3,7 @@ package cn.luckydeer.weixin.controller.shirotest;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,7 @@ public class ShiroController extends BaseController {
     @ResponseBody
     public String test() throws Exception {
         return new ResponseObj(ViewShowEnums.INFO_SUCCESS.getStatus(),
-            ViewShowEnums.INFO_SUCCESS.getDetail()).toJson().toString();
+            ViewShowEnums.INFO_SUCCESS.getDetail()).toJson(request, response);
     }
 
     /**
@@ -38,18 +39,22 @@ public class ShiroController extends BaseController {
     public String testLogin(HttpServletRequest request, HttpServletResponse response, String userId) {
 
         if (StringUtils.isBlank(userId)) {
-            return new ResponseObj(ViewShowEnums.ERROR_FAILED.getStatus(), "参数有误").toJson()
-                .toString();
+            return new ResponseObj(ViewShowEnums.ERROR_FAILED.getStatus(), "参数有误").toJson(request,
+                response).toString();
         }
+
+        HttpSession session = request.getSession();
+        System.out.println("当前SessionId为:" + session.getId());
+        session.setAttribute("userId", userId);
         UserSessionModel sessionUser = new UserSessionModel();
         sessionUser.setUserId(userId);
         OperationContextHolder.setIsLoggerUser(sessionUser);
-
-        Cookie cookie = new Cookie("user", sessionUser.getUserId());
+        System.out.println("局部线程缓存的用户数据是:" + OperationContextHolder.getSessionUser().getUserId());
+        Cookie cookie = new Cookie("userId", userId);
         cookie.setMaxAge(60 * 2);
         response.addCookie(cookie);
         return new ResponseObj(ViewShowEnums.INFO_SUCCESS.getStatus(),
-            ViewShowEnums.INFO_SUCCESS.getDetail()).toJson().toString();
+            ViewShowEnums.INFO_SUCCESS.getDetail()).toJson(request, response);
     }
 
     /**
@@ -63,13 +68,16 @@ public class ShiroController extends BaseController {
     @IgnoreAuth
     public String testGetCurrentUser(HttpServletRequest request, HttpServletResponse response) {
         UserSessionModel userSession = OperationContextHolder.getSessionUser();
+        System.out.println(request.getSession().getId());
+        System.out.println(request.getSession().getAttribute("userId"));
         if (StringUtils.isNotBlank(userSession.getUserId())) {
+            System.out.println("当前用户Id为空");
             return new ResponseObj(ViewShowEnums.INFO_SUCCESS.getStatus(),
-                ViewShowEnums.INFO_SUCCESS.getDetail(), userSession.getUserId()).toJson()
-                .toString();
+                ViewShowEnums.INFO_SUCCESS.getDetail(), userSession.getUserId()).toJson(request,
+                response);
         }
         return new ResponseObj(ViewShowEnums.ERROR_FAILED.getStatus(),
-            ViewShowEnums.ERROR_FAILED.getDetail()).toJson().toString();
+            ViewShowEnums.ERROR_FAILED.getDetail()).toJson(request, response);
     }
 
 }

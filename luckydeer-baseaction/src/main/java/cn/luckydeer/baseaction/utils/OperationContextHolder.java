@@ -39,4 +39,10 @@ public class OperationContextHolder {
         return null != sessionUser ? sessionUser.getUserId() : null;
     }
 
+    /**
+     * 清除当前会话
+     */
+    public static void clearUser() {
+        ContextHolder.clearContext();
+    }
 }

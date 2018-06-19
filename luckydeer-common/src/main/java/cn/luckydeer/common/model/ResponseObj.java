@@ -9,8 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.util.CollectionUtils;
 
+import cn.luckydeer.common.constants.ViewConstants;
 import cn.luckydeer.common.enums.ViewShowEnums;
 import cn.luckydeer.common.utils.DomainUtils;
+
+import com.alibaba.fastjson.JSON;
 
 /**
  * 
@@ -72,7 +75,7 @@ public class ResponseObj implements Serializable {
         // 设置跨域
         DomainUtils.setAccessContrlAllowOrigin(request, response);
         //如果客户端传入了callBack变量说明该请求是jsonp跨域请求，则将数据包装成jsonp所需格式返回
-        String callBackFunName = request.getParameter(ViewContants.JSONP_CALLBACK_FUN_NAME);
+        String callBackFunName = request.getParameter(ViewConstants.JSONP_CALLBACK_FUN_NAME);
 
         String resultJson = null;
 
@@ -86,10 +89,9 @@ public class ResponseObj implements Serializable {
         }
 
         if (StringUtils.isNotBlank(callBackFunName)) {
-            return callBackFunName + "(" + GsonUtils.getGson().toJson(this) + ")";
+            return callBackFunName + "(" + JSON.toJSONString(this) + ")";
         }
-
-        return GsonUtils.getGson().toJson(this);
+        return JSON.toJSONString(this);
     }
 
     /** <p class="detail">
@@ -114,7 +116,7 @@ public class ResponseObj implements Serializable {
         }
         String result = dataToString();
         //如果客户端传入了callBack变量说明该请求是jsonp跨域请求，则将数据包装成jsonp所需格式返回
-        String callBackFunName = request.getParameter(ViewContants.JSONP_CALLBACK_FUN_NAME);
+        String callBackFunName = request.getParameter(ViewConstants.JSONP_CALLBACK_FUN_NAME);
         if (StringUtils.isNotBlank(callBackFunName)) {
             return callBackFunName + "(" + result + ")";
         }
