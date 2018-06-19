@@ -76,6 +76,21 @@
 		</layout>
 	</appender>
 
+	<!-- Session日志 -->
+	<logger name="LUCKYDEER-SESSION-LOG" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="APPENDER-LUCKYDEER-MEMCACHED" />
+	</logger>
+
+	<appender name="APPENDER-LUCKYDEER-SESSION" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="/windata/logs/luckydeer/luckydeer-session.log" />
+		<param name="append" value="true" />
+		<param name="encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p (%c:%L)- %m%n" />
+		</layout>
+	</appender>
+
 	<!-- 系统日志 -->
 	<logger name="LUCKYDEER-SYSTEM-LOG" additivity="false">
 		<level value="INFO" />

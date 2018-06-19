@@ -45,6 +45,18 @@ public interface DistributedCached {
     boolean put(CachedType cachedType, String key, int exp, Object value);
 
     /**
+     * 
+     * 注解：更新缓存
+     * @param cachedType
+     * @param key
+     * @param exp 失效时间
+     * @param value
+     * @return
+     * @author yuanxx @date 2018年6月19日
+     */
+    boolean update(CachedType cachedType, String key, int exp, Object value);
+
+    /**
      * 注解：非阻塞式分布式锁
      * @param cachedType
      * @param keyMutex
@@ -77,4 +89,5 @@ public interface DistributedCached {
      * @return
      */
     boolean cleanAll();
+
 }

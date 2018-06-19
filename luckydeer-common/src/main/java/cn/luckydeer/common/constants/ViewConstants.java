@@ -12,5 +12,9 @@ public interface ViewConstants {
      * callback请求方法名称
      */
     String JSONP_CALLBACK_FUN_NAME = "callback";
+    /**
+     * 请求 ticket参数key
+     */
+    String LOGIN_TICKET_KEY        = "token";
 
 }

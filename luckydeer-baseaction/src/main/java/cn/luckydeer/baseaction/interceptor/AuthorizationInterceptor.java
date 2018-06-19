@@ -8,10 +8,14 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import cn.luckydeer.baseaction.annotation.IgnoreAuth;
-import cn.luckydeer.baseaction.constant.UserDefaultConstant;
 import cn.luckydeer.baseaction.exception.TokenException;
 import cn.luckydeer.baseaction.utils.OperationContextHolder;
+import cn.luckydeer.common.constants.HeaderContants;
+import cn.luckydeer.common.constants.ViewConstants;
 import cn.luckydeer.common.enums.ViewShowEnums;
+import cn.luckydeer.common.helper.CookieHelper;
+import cn.luckydeer.common.model.ClientModel;
+import cn.luckydeer.memcached.api.DistributedCached;
 
 /**
  * Token校验
@@ -24,6 +28,10 @@ import cn.luckydeer.common.enums.ViewShowEnums;
  * @version $Id: AuthorizationInterceptor.java, v 0.1 2018年6月15日 下午1:51:28 yuanxx Exp $
  */
 public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
+
+    private DistributedCached distributedCached;
+
+    private CookieHelper      cookieHelper;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
@@ -40,8 +48,11 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
             return true;
         }
 
+        //TODO 暂时只去验证ticket（token）
+        ClientModel clientModel = cookieHelper.getClientHeader(request);
+
         /** 1.获取Token */
-        String token = request.getHeader(UserDefaultConstant.LOGIN_TOKEN_KEY);
+        String token = request.getHeader(ViewConstants.LOGIN_TICKET_KEY);
 
         /** 2.如果Token获取失败  */
         if (StringUtils.isBlank(token)) {
@@ -49,6 +60,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
         }
 
         /** 3.查询token信息 */
+
         return super.preHandle(request, response, handler);
     }
 
@@ -59,6 +71,14 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
         /** 清楚当前现线程的 缓存会话 */
         OperationContextHolder.clearUser();
         super.afterCompletion(request, response, handler, ex);
+    }
+
+    public void setDistributedCached(DistributedCached distributedCached) {
+        this.distributedCached = distributedCached;
+    }
+
+    public void setCookieHelper(CookieHelper cookieHelper) {
+        this.cookieHelper = cookieHelper;
     }
 
 }

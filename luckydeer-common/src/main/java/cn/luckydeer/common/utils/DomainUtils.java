@@ -19,6 +19,44 @@ public class DomainUtils {
     private static final Log logger = LogFactory.getLog(DomainUtils.class);
 
     /**
+     * 取环境配置
+     * @return
+     */
+    public static String getVmConfigValue(String key) {
+        return CustomizedProperty.getContextProperty(key);
+    }
+
+    /**
+     * 
+     * 注解：获取当前的Url
+     * @return
+     * @author yuanxx @date 2018年6月19日
+     */
+    public static String getHttpUrl() {
+        return CustomizedProperty.getContextProperty("luckydeer.url");
+    }
+
+    /**
+     * 取一级域名
+     * @return
+     */
+    public static String getDomain() {
+        return CustomizedProperty.getContextProperty("luckydeer.domain");
+    }
+
+    /**
+     * 是否开发环境
+     * @return
+     */
+    public static boolean isDebug() {
+        String current = CustomizedProperty.getContextProperty("current.environment");
+        if (!StringUtils.equalsIgnoreCase("FORMAL", current)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * 注解：
      * 参考：http://blog.csdn.net/mygrilzhuyulin/article/details/52690129
      * 前端关键加入

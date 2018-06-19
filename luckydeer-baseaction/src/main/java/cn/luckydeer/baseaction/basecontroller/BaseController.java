@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.luckydeer.baseaction.exception.TokenException;
 import cn.luckydeer.common.enums.ViewShowEnums;
+import cn.luckydeer.common.helper.HttpHelper;
 import cn.luckydeer.common.model.ResponseObj;
 
 /**
@@ -80,11 +81,7 @@ public class BaseController {
      * @return 客户端Ip
      */
     public String getClientIp() {
-        String xff = request.getHeader("x-forwarded-for");
-        if (xff == null) {
-            return request.getRemoteAddr();
-        }
-        return xff;
+        return HttpHelper.loadIpAddr(request);
     }
 
 }

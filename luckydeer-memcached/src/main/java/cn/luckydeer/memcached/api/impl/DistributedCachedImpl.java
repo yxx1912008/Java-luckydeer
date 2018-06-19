@@ -195,4 +195,23 @@ public class DistributedCachedImpl extends AbstractTairCached {
         return true;
     }
 
+    @Override
+    public boolean update(CachedType cachedType, String key, int exp, Object value) {
+
+        if (validateExp(exp) && validateKey(key) && validateValue(value)) {
+            try {
+                OperationFuture<Boolean> future = cachedMap.get(cachedType.getCode()).replace(key,
+                    exp, value);
+                return future.get().booleanValue();
+            } catch (Exception e) {
+                LOGGER.error("缓存更新失败", e);
+            }
+        }
+        return false;
+    }
+
+    public void setCachedMap(Map<String, MemcachedClient> cachedMap) {
+        this.cachedMap = cachedMap;
+    }
+
 }
