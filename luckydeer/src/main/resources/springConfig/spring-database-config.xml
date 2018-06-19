@@ -24,8 +24,7 @@
 		<property name="locations">
 			<list>
 				<value>file:${catalina.home}/db/luckydeer-db.properties</value>
-				<value>file:${catalina.home}/domain/luckydeerDomain.properties
-				</value>
+				<value>file:${catalina.home}/domain/luckydeerDomain.properties</value>
 			</list>
 		</property>
 	</bean>
