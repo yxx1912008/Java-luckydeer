@@ -26,7 +26,7 @@ import cn.luckydeer.common.model.ResponseObj;
 @ControllerAdvice
 public class BaseController {
 
-    protected Logger              logger = Logger.getLogger(getClass());
+    protected Logger              logger = Logger.getLogger("LUCKYDEER-CONTROLLER-LOG");
 
     /**
      * 得到request对象
