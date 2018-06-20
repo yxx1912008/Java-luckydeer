@@ -1,4 +1,4 @@
-package cn.luckydeer.common.enums;
+package cn.luckydeer.common.enums.view;
 
 /**
  * 

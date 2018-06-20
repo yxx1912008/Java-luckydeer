@@ -14,7 +14,7 @@ import cn.luckydeer.baseaction.annotation.IgnoreAuth;
 import cn.luckydeer.baseaction.exception.TokenException;
 import cn.luckydeer.baseaction.utils.OperationContextHolder;
 import cn.luckydeer.common.constants.ViewConstants;
-import cn.luckydeer.common.enums.ViewShowEnums;
+import cn.luckydeer.common.enums.view.ViewShowEnums;
 import cn.luckydeer.common.helper.CookieHelper;
 import cn.luckydeer.common.model.ClientModel;
 import cn.luckydeer.common.utils.DateUtilSelf;

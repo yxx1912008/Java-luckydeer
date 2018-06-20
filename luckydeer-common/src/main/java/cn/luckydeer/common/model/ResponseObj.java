@@ -10,7 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.util.CollectionUtils;
 
 import cn.luckydeer.common.constants.ViewConstants;
-import cn.luckydeer.common.enums.ViewShowEnums;
+import cn.luckydeer.common.enums.view.ViewShowEnums;
 import cn.luckydeer.common.utils.DomainUtils;
 
 import com.alibaba.fastjson.JSON;

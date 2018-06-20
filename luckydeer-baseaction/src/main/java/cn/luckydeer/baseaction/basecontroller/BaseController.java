@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.luckydeer.baseaction.exception.TokenException;
-import cn.luckydeer.common.enums.ViewShowEnums;
+import cn.luckydeer.common.enums.view.ViewShowEnums;
 import cn.luckydeer.common.helper.HttpHelper;
 import cn.luckydeer.common.model.ResponseObj;
 
