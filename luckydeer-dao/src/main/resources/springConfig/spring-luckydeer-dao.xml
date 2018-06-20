@@ -8,8 +8,10 @@
     http://www.springframework.org/schema/context/spring-context-3.0.xsd"
 	default-autowire="byName">
 
-	<!-- <bean id="noteInfoDao" class="cn.luckydeer.note.dao.note.daoImpl.NoteInfoDao" 
-		parent="luckyDeerAbstractDAO"> <property name="namespace" value="cn.luckydeer.note.dao.note.daoImpl.NoteInfoDao." 
-		/> </bean> -->
+	<!-- 系统用户 操作 -->
+	<bean id="sysUserDao" class="cn.luckydeer.dao.user.daoImpl.SysUserDao"
+		parent="luckyDeerAbstractDAO">
+		<property name="namespace" value="cn.luckydeer.dao.user.daoImpl.SysUserDao." />
+	</bean>
 
 </beans>
