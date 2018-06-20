@@ -3,6 +3,8 @@ package cn.luckydeer.model.token;
 import java.io.Serializable;
 import java.util.Date;
 
+import cn.luckydeer.model.user.UserSessionModel;
+
 /**
  * 
  * Token的详细信息
@@ -14,21 +16,13 @@ public class TokenModel implements Serializable {
     /** serialVersionUID */
     private static final long serialVersionUID = -7991522556641457631L;
     //用户ID
-    private String            userId;
+    private UserSessionModel  sessionInfo;
     //token
     private String            token;
     //过期时间
     private Date              expireTime;
     //更新时间
     private Date              updateTime;
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 
     public String getToken() {
         return token;
@@ -52,6 +46,14 @@ public class TokenModel implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public UserSessionModel getSessionInfo() {
+        return sessionInfo;
+    }
+
+    public void setSessionInfo(UserSessionModel sessionInfo) {
+        this.sessionInfo = sessionInfo;
     }
 
 }

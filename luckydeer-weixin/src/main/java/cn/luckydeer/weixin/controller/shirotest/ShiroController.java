@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,10 +16,15 @@ import cn.luckydeer.baseaction.basecontroller.BaseController;
 import cn.luckydeer.baseaction.utils.OperationContextHolder;
 import cn.luckydeer.common.enums.ViewShowEnums;
 import cn.luckydeer.common.model.ResponseObj;
+import cn.luckydeer.common.utils.SelfStringUtils;
+import cn.luckydeer.manager.token.TokenManager;
 import cn.luckydeer.model.user.UserSessionModel;
 
 @Controller
 public class ShiroController extends BaseController {
+
+    @Autowired
+    private TokenManager tokenManager;
 
     @RequestMapping(value = "test.wx", produces = { "application/json;charset=UTF-8" })
     @ResponseBody
@@ -48,11 +54,12 @@ public class ShiroController extends BaseController {
         session.setAttribute("userId", userId);
         UserSessionModel sessionUser = new UserSessionModel();
         sessionUser.setUserId(userId);
-        OperationContextHolder.setIsLoggerUser(sessionUser);
-        System.out.println("局部线程缓存的用户数据是:" + OperationContextHolder.getSessionUser().getUserId());
         Cookie cookie = new Cookie("userId", userId);
-        cookie.setMaxAge(60 * 2);
+        cookie.setMaxAge(60 * 30);
         response.addCookie(cookie);
+        String token = SelfStringUtils.getRandomString(32);
+        System.out.println(token);
+        tokenManager.setToken(token, sessionUser);
         return new ResponseObj(ViewShowEnums.INFO_SUCCESS.getStatus(),
             ViewShowEnums.INFO_SUCCESS.getDetail()).toJson(request, response);
     }
@@ -65,13 +72,12 @@ public class ShiroController extends BaseController {
      */
     @RequestMapping(value = "testGetCurrentUser.wx", produces = { "application/json;charset=UTF-8" })
     @ResponseBody
-    @IgnoreAuth
     public String testGetCurrentUser(HttpServletRequest request, HttpServletResponse response) {
         UserSessionModel userSession = OperationContextHolder.getSessionUser();
         System.out.println(request.getSession().getId());
         System.out.println(request.getSession().getAttribute("userId"));
         if (StringUtils.isNotBlank(userSession.getUserId())) {
-            System.out.println("当前用户Id为空");
+            System.out.println(userSession.getUserId() + "," + userSession.getToken());
             return new ResponseObj(ViewShowEnums.INFO_SUCCESS.getStatus(),
                 ViewShowEnums.INFO_SUCCESS.getDetail(), userSession.getUserId()).toJson(request,
                 response);

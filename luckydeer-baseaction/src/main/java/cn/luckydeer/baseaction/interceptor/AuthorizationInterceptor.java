@@ -1,21 +1,26 @@
 package cn.luckydeer.baseaction.interceptor;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import cn.luckydeer.baseaction.annotation.IgnoreAuth;
 import cn.luckydeer.baseaction.exception.TokenException;
 import cn.luckydeer.baseaction.utils.OperationContextHolder;
-import cn.luckydeer.common.constants.HeaderContants;
 import cn.luckydeer.common.constants.ViewConstants;
 import cn.luckydeer.common.enums.ViewShowEnums;
 import cn.luckydeer.common.helper.CookieHelper;
 import cn.luckydeer.common.model.ClientModel;
-import cn.luckydeer.memcached.api.DistributedCached;
+import cn.luckydeer.common.utils.DateUtilSelf;
+import cn.luckydeer.manager.token.TokenManager;
+import cn.luckydeer.model.token.TokenModel;
+import cn.luckydeer.model.user.UserSessionModel;
 
 /**
  * Token校验
@@ -29,9 +34,11 @@ import cn.luckydeer.memcached.api.DistributedCached;
  */
 public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 
-    private DistributedCached distributedCached;
+    @Autowired
+    private CookieHelper cookieHelper;
 
-    private CookieHelper      cookieHelper;
+    @Autowired
+    private TokenManager tokenManager;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
@@ -60,25 +67,28 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
         }
 
         /** 3.查询token信息 */
+        UserSessionModel userSession = tokenManager.getModelByToken(token);
 
+        if (null == userSession) {
+            throw new TokenException("登录信息查询失败,请重新登录", ViewShowEnums.ERROR_FAILED.getStatus());
+        }
+
+        if (DateUtilSelf.calculateDecreaseDate(userSession.getExpireTime(), new Date()) > 0) {
+            throw new TokenException("登录信息失效,请重新登录", ViewShowEnums.ERROR_FAILED.getStatus());
+        }
+
+        OperationContextHolder.setIsLoggerUser(userSession);
         return super.preHandle(request, response, handler);
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
                                 Object handler, Exception ex) throws Exception {
+        //TODO 待清理
         System.out.println("清除系统会话");
         /** 清楚当前现线程的 缓存会话 */
         OperationContextHolder.clearUser();
         super.afterCompletion(request, response, handler, ex);
-    }
-
-    public void setDistributedCached(DistributedCached distributedCached) {
-        this.distributedCached = distributedCached;
-    }
-
-    public void setCookieHelper(CookieHelper cookieHelper) {
-        this.cookieHelper = cookieHelper;
     }
 
 }

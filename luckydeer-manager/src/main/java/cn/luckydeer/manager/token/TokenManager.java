@@ -8,6 +8,7 @@ import cn.luckydeer.common.utils.SelfStringUtils;
 import cn.luckydeer.memcached.api.DistributedCached;
 import cn.luckydeer.memcached.enums.CachedType;
 import cn.luckydeer.model.token.TokenModel;
+import cn.luckydeer.model.user.UserSessionModel;
 
 /**
  * Token管理
@@ -26,27 +27,41 @@ public class TokenManager {
      * @return
      * @author yuanxx @date 2018年6月19日
      */
-    public boolean setToken(String token, String userId) {
+    public boolean setToken(String token, UserSessionModel sessionModel) {
 
-        TokenModel tokenModel = (TokenModel) distributedCached.get(CachedType.USER_SESSION, token);
+        UserSessionModel userSession = (UserSessionModel) distributedCached.get(
+            CachedType.USER_SESSION, token);
         Date date = new Date();
-        if (null == tokenModel) {
-            tokenModel = new TokenModel();
-            tokenModel.setToken(SelfStringUtils.getRandomString(32));
-            tokenModel.setUpdateTime(date);
-            tokenModel.setExpireTime(DateUtilSelf.increaseHour(date,
-                HeaderContants.TOKEN_FAILURE_TIME));
-            tokenModel.setUserId(userId);
-            return distributedCached.put(CachedType.USER_SESSION, tokenModel.getToken(),
-                HeaderContants.TOKEN_FAILURE_TIME);
+        if (null == userSession) {
+            sessionModel.setToken(token);
+            sessionModel.setLoginChannel("WX");
+            sessionModel.setUpdateTime(date);
+            sessionModel.setExpireTime(DateUtilSelf.increaseHour(date, 1));
+            return distributedCached.put(CachedType.USER_SESSION, token,
+                HeaderContants.TOKEN_FAILURE_TIME, sessionModel);
         } else {
-
-            tokenModel.setUpdateTime(new Date());
-            tokenModel.setExpireTime(DateUtilSelf.increaseHour(date,
-                HeaderContants.TOKEN_FAILURE_TIME));
+            userSession.setUpdateTime(new Date());
+            userSession.setExpireTime(DateUtilSelf.increaseHour(date, 1));
             return distributedCached.update(CachedType.USER_SESSION, token,
-                HeaderContants.TOKEN_FAILURE_TIME, tokenModel);
+                HeaderContants.TOKEN_FAILURE_TIME, userSession);
         }
+    }
+
+    /**
+     * 
+     * 注解：获取TokenModel
+     * @param token
+     * @return
+     * @author yuanxx @date 2018年6月19日
+     */
+    public UserSessionModel getModelByToken(String token) {
+        UserSessionModel userSessionModel = (UserSessionModel) distributedCached.get(
+            CachedType.USER_SESSION, token);
+        return userSessionModel;
+    }
+
+    public void setDistributedCached(DistributedCached distributedCached) {
+        this.distributedCached = distributedCached;
     }
 
 }

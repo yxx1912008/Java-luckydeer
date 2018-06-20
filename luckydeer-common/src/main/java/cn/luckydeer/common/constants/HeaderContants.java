@@ -32,7 +32,7 @@ public interface HeaderContants {
     /** 客户端签名 md5(ticket + timeStamp + 秘钥)  */
     String  SIGN               = "sign";
 
-    /** token 默认失效时间  当前设置为半个小时 */
-    Integer TOKEN_FAILURE_TIME = 60 * 30;
+    /** token 默认失效时间  当前设置为1个小时 */
+    Integer TOKEN_FAILURE_TIME = 60 * 60 * 1;
 
 }
