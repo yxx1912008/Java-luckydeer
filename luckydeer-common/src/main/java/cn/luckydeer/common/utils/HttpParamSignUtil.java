@@ -1,5 +1,10 @@
 package cn.luckydeer.common.utils;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.lang.StringUtils;
 
 import cn.luckydeer.common.enums.HttpChannelType;
@@ -40,6 +45,54 @@ public class HttpParamSignUtil {
         }
 
         return null;
+    }
+
+    /** 
+     * 把数组所有元素排序，并按照“参数=参数值”的模式用“&”字符拼接成字符串
+     * @param params 需要排序并参与字符拼接的参数组
+     * @return 拼接后字符串
+     */
+    public static String toBeSignStirng(Map<String, String> params) {
+
+        List<String> keys = new ArrayList<String>(params.keySet());
+        Collections.sort(keys);
+
+        StringBuilder prestr = new StringBuilder();
+
+        for (int i = 0; i < keys.size(); i++) {
+            String key = keys.get(i);
+            String value = params.get(key);
+
+            if (i == keys.size() - 1) {//拼接时，不包括最后一个&字符
+                prestr.append(key).append("=").append(value);
+            } else {
+                prestr.append(key).append("=").append(value).append("&");
+            }
+        }
+
+        return prestr.toString();
+    }
+
+    /**
+     * httpClient 常用的参数签名方式
+     * key=value&key=value
+     * @param keyValues
+     * @return  获取待签名的字符串
+     */
+    public static String toBeSignStirng(List<String> keyValues) {
+        StringBuilder buider = new StringBuilder();
+        Collections.sort(keyValues);
+        int size = keyValues.size();
+        for (int i = 0; i < size; i++) {
+            // 最后一次不需要拼接符
+            if (i == size - 1) {
+                buider.append(keyValues.get(i));
+            } else {
+                buider.append(keyValues.get(i)).append("&");
+            }
+
+        }
+        return buider.toString();
     }
 
 }
