@@ -9,4 +9,8 @@
 	default-autowire="byName">
 
 	<bean id="tokenManager" class="cn.luckydeer.manager.token.TokenManager" />
+
+	<bean id="webMagicManager" class="cn.luckydeer.manager.webmagic.WebMagicManager" />
+
+
 </beans>
