@@ -31,5 +31,7 @@
 	<mappers>
 		<!-- 系统用户表 -->
 		<mapper resource="sqlmap/mapping/SysUserDoMapper.xml" />
+		<!-- 购物猫首页海报 -->
+		<mapper resource="sqlmap/mapping/CatIndexPosterDoMapper.xml"/>
 	</mappers>
 </configuration>

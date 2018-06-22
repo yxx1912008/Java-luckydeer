@@ -14,4 +14,12 @@
 		<property name="namespace" value="cn.luckydeer.dao.user.daoImpl.SysUserDao." />
 	</bean>
 
+	<!-- 购物猫首页海报 -->
+	<bean id="catIndexPosterDao" class="cn.luckydeer.dao.webmagic.daoImpl.CatIndexPosterDao"
+		parent="luckyDeerAbstractDAO">
+		<property name="namespace"
+			value="cn.luckydeer.dao.webmagic.daoImpl.CatIndexPosterDao." />
+	</bean>
+
+
 </beans>
