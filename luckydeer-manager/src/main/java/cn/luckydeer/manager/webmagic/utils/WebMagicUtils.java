@@ -41,8 +41,8 @@ public class WebMagicUtils {
      * @return
      * @author yuanxx @date 2018年6月25日
      */
-    public synchronized static <T> boolean getIndexPosterForUrl(String url, Class<T> modelClass,
-                                                                PageModelPipeline<Object> pipeLine) {
+    public synchronized static <T> boolean crawlContent(String url, Class<T> modelClass,
+                                                        PageModelPipeline<Object> pipeLine) {
         logger.info("开始爬取内容:class=" + modelClass + ";url:" + url);
         /** 1.创建首页抓取爬虫  */
         Spider indexPosterSpider = OOSpider.create(Site.me(), pipeLine, modelClass).addUrl(url);
@@ -90,9 +90,8 @@ public class WebMagicUtils {
 
     public static void main(String[] args) {
 
-        boolean flag = WebMagicUtils.getIndexPosterForUrl(WebmagicConstant.CAT_HOST,
+        boolean flag = WebMagicUtils.crawlContent(WebmagicConstant.CAT_HOST,
             IndexPosterModel.class, new CatPipeLine());
-
         System.out.println(flag);
 
     }
