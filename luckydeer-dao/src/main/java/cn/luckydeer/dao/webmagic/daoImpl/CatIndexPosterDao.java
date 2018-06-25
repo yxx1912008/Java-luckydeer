@@ -24,7 +24,7 @@ public class CatIndexPosterDao extends SqlSessionDaoSupport implements ICatIndex
 
     @Override
     public int insert(CatIndexPosterDo record) {
-        return 0;
+        return getSqlSession().insert(namespace + "insert", record);
     }
 
     @Override
