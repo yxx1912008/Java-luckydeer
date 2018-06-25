@@ -8,7 +8,6 @@ public class CustomSpiderStatus extends SpiderStatus implements CustomSpiderStat
 
     public CustomSpiderStatus(Spider spider, MonitorSpiderListener monitorSpiderListener) {
         super(spider, monitorSpiderListener);
-        System.out.println("监听器开始启动");
     }
 
     /**
@@ -18,7 +17,5 @@ public class CustomSpiderStatus extends SpiderStatus implements CustomSpiderStat
     public String getSchedulerName() {
         return spider.getScheduler().getClass().getName();
     }
-    
-    
 
 }
