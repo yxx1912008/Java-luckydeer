@@ -30,7 +30,7 @@ import cn.luckydeer.webmagic.model.IndexPosterModel;
  */
 public class WebMagicUtils {
 
-    private static final Logger logger = LoggerFactory.getLogger("LUCKYDEER-MANAGER-LOG");
+    private static final Logger logger = LoggerFactory.getLogger("LUCKYDEER-WEBMAGIC-LOG");
 
     /**
      * 
@@ -68,8 +68,7 @@ public class WebMagicUtils {
             while (true) {
                 /**  根据状态判断爬虫是否抓取完毕 */
                 if (StringUtils.equals(spiderStatusMBean.getStatus(), Status.Stopped.name())) {
-                    logger.info("爬虫抓取结束:等待次数" + count + "ms");
-                    System.out.println(count);
+                    logger.info("爬虫抓取结束:等待次数" + count + "次");
                     return true;
                 }
                 count++;
