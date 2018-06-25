@@ -1,9 +1,6 @@
-package cn.luckydeer.manager.indexposter;
+package cn.luckydeer.manager.webmagic.utils;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.management.JMException;
 
@@ -14,61 +11,34 @@ import org.springframework.util.CollectionUtils;
 
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
-import us.codecraft.webmagic.Spider.Status;
 import us.codecraft.webmagic.SpiderListener;
+import us.codecraft.webmagic.Spider.Status;
 import us.codecraft.webmagic.model.OOSpider;
-import us.codecraft.webmagic.monitor.SpiderMonitor.MonitorSpiderListener;
 import us.codecraft.webmagic.monitor.SpiderStatusMXBean;
-import cn.luckydeer.common.utils.DateUtilSelf;
+import us.codecraft.webmagic.monitor.SpiderMonitor.MonitorSpiderListener;
 import cn.luckydeer.manager.webmagic.monitor.CustomSpiderMonitor;
 import cn.luckydeer.manager.webmagic.pipeline.CatPipeLine;
 import cn.luckydeer.webmagic.constants.WebmagicConstant;
 import cn.luckydeer.webmagic.model.IndexPosterModel;
 
 /**
+ * 自写爬虫框架工具类
  * 
- * 购物猫首页海报管理
  * @author yuanxx
- * @version $Id: IndexPosterManager.java, v 0.1 2018年6月22日 下午5:07:50 yuanxx Exp $
+ * @version $Id: WebMagicUtils.java, v 0.1 2018年6月25日 上午11:21:49 yuanxx Exp $
  */
-public class IndexPosterManager {
+public class WebMagicUtils {
 
-    Logger                             logger      = LoggerFactory
-                                                       .getLogger("LUCKYDEER-MANAGER-LOG");
-
-    /** 缓存 用来缓存首页海报  */
-    private static Map<String, Object> posterCache = new HashMap<String, Object>();
+    Logger logger = LoggerFactory.getLogger("LUCKYDEER-MANAGER-LOG");
 
     /**
      * 
-     * 注解：获取首页海报
-     * @return
-     * @author yuanxx @date 2018年6月22日
-     */
-    private List<IndexPosterModel> getIndexPoster() {
-
-        Date date = new Date();
-
-        /**  是否超过 最后更新时间 默认缓存更新时间为每两个小时  */
-        if (null == posterCache.get("expiryTime")
-            || (DateUtilSelf.calculateDecreaseMinute((Date) posterCache.get("expiryTime"), date) > 120)) {
-            logger.info("读取海报缓存过期时间失败");
-            Date expiryTime = DateUtilSelf.increaseHour(date, 2);
-            posterCache.put("expiryTime", expiryTime);
-            //            List<IndexPosterModel> list = getIndexPosterForUrl();
-
-        }
-
-        return null;
-    }
-
-    /**
-     * 
-     * 注解：通过爬虫 抓取首页海报信息
-     * 并存入数据库
+     * 注解：通过爬虫爬取信息
+     * 并进行后续处理
+     * @param url 请求地址
+     * @param modelClass model class
      * @return
      * @author yuanxx @date 2018年6月25日
-     * @param <T>
      */
     //TODO 暂时没有加入多线程的情况
     public <T> boolean getIndexPosterForUrl(String url, Class<T> modelClass) {
@@ -95,6 +65,7 @@ public class IndexPosterManager {
             SpiderStatusMXBean spiderStatusMBean = spiderMonitor.getSpiderStatusMBean(
                 indexPosterSpider, listener);
             while (true) {
+                /**  根据状态判断爬虫是否抓取完毕 */
                 if (StringUtils.equals(spiderStatusMBean.getStatus(), Status.Stopped.name())) {
                     logger.info("爬虫抓取结束");
                     return true;
@@ -102,15 +73,10 @@ public class IndexPosterManager {
             }
         } catch (JMException e) {
             logger.error("首页爬虫注册失败:" + WebmagicConstant.CAT_HOST, e);
+        } catch (Exception e) {
+            logger.error("爬虫抓取失败", e);
         }
         return false;
     }
 
-    public static void main(String[] args) throws Exception {
-
-        IndexPosterManager manager = new IndexPosterManager();
-        String url = WebmagicConstant.CAT_HOST;
-        manager.getIndexPosterForUrl(url, IndexPosterModel.class);
-
-    }
 }

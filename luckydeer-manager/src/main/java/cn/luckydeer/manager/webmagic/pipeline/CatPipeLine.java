@@ -5,7 +5,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.PageModelPipeline;
 import cn.luckydeer.dao.webmagic.daoInterface.ICatIndexPosterDao;
-import cn.luckydeer.dao.webmagic.dataobject.CatIndexPosterDo;
 import cn.luckydeer.webmagic.model.IndexPosterModel;
 
 public class CatPipeLine implements PageModelPipeline<Object> {
