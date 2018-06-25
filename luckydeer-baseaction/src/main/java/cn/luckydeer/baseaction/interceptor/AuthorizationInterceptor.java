@@ -19,7 +19,6 @@ import cn.luckydeer.common.helper.CookieHelper;
 import cn.luckydeer.common.model.ClientModel;
 import cn.luckydeer.common.utils.DateUtilSelf;
 import cn.luckydeer.manager.token.TokenManager;
-import cn.luckydeer.model.token.TokenModel;
 import cn.luckydeer.model.user.UserSessionModel;
 
 /**
@@ -84,8 +83,6 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
                                 Object handler, Exception ex) throws Exception {
-        //TODO 待清理
-        System.out.println("清除系统会话");
         /** 清楚当前现线程的 缓存会话 */
         OperationContextHolder.clearUser();
         super.afterCompletion(request, response, handler, ex);
