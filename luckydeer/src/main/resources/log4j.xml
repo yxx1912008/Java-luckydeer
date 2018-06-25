@@ -53,7 +53,7 @@
 
 	<!-- Dao层日志监控 -->
 	<appender name="APPENDER-LUCKYDEER-DAO" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="file" value="/windata/logs/luckydeer/note-dao.log" />
+		<param name="file" value="/windata/logs/luckydeer/luckydeer-dao.log" />
 		<param name="append" value="true" />
 		<param name="encoding" value="UTF-8" />
 		<layout class="org.apache.log4j.PatternLayout">
@@ -75,6 +75,23 @@
 			<param name="ConversionPattern" value="%d %-5p (%c:%L)- %m%n" />
 		</layout>
 	</appender>
+
+	<!-- WebMagic监控日志 -->
+	<logger name="LUCKYDEER-WEBMAGIC-LOG" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="APPENDER-LUCKYDEER-WEBMAGIC" />
+	</logger>
+
+	<appender name="APPENDER-LUCKYDEER-WEBMAGIC" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="/windata/logs/luckydeer/luckydeer-webmagic.log" />
+		<param name="append" value="true" />
+		<param name="encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p (%c:%L)- %m%n" />
+		</layout>
+	</appender>
+
+
 
 	<!-- Session日志 -->
 	<logger name="LUCKYDEER-SESSION-LOG" additivity="false">

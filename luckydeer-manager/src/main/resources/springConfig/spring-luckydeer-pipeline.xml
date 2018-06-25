@@ -8,6 +8,7 @@
     http://www.springframework.org/schema/context/spring-context-3.0.xsd"
 	default-autowire="byName">
 
+	<!-- 购物猫相关 pipeline -->
 	<bean id="catPipeLine" class="cn.luckydeer.manager.webmagic.pipeline.CatPipeLine">
 		<property name="indexPosterManager" ref="indexPosterManager"></property>
 	</bean>
