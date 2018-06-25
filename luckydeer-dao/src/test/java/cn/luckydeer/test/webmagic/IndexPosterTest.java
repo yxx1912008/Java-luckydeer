@@ -1,5 +1,7 @@
 package cn.luckydeer.test.webmagic;
 
+import static org.junit.Assert.*;
+
 import java.util.List;
 
 import org.junit.Test;
@@ -19,6 +21,23 @@ public class IndexPosterTest extends BaseTest {
 
     @Autowired
     private ICatIndexPosterDao catIndexPosterDao;
+
+    /**
+     * 
+     * 测试：插入一条海报数据
+     * @throws Exception
+     * @author yuanxx @date 2018年6月25日
+     */
+    @Test
+    public void insert() throws Exception {
+        CatIndexPosterDo record = new CatIndexPosterDo();
+        String imgUrl = "imgurl";
+        record.setImgUrl(imgUrl);
+        String targetUrl = "imgurl";
+        record.setTargetUrl(targetUrl);
+        catIndexPosterDao.insert(record);
+
+    }
 
     /**
      * 
