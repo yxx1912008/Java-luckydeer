@@ -1,5 +1,7 @@
 package cn.luckydeer.test.user;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -34,4 +36,18 @@ public class SysUserDaoTest extends BaseTest {
         System.out.println(result);
     }
 
+    private static long startTime;
+
+    @Test
+    @Before
+    public void start() throws Exception {
+        System.out.println("----------测试开始----------");
+        startTime = System.currentTimeMillis();
+    }
+
+    @Test
+    @After
+    public void end() throws Exception {
+        System.out.println("--------执行结束，耗时:" + (System.currentTimeMillis() - startTime) + "ms---");
+    }
 }
