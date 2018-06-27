@@ -1,7 +1,3 @@
-/**
- * winchance Inc.
- * Copyright (c) 2010-2014 All Rights Reserved.
- */
 package cn.luckydeer.common.utils;
 
 import java.text.DateFormat;
