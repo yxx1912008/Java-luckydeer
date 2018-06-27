@@ -7,7 +7,7 @@ package ${classPath};
  * 测试类:${className}
  * 
  * @author yuanxx
- * @version $Id: ${className}.java, v 0.1 ${time} yuanxx Exp $
+ * @version $Id: ${className}Test.java, v 0.1 ${.now}  Exp $
  */
 public class ${className}Test extends BaseTest {
 
