@@ -23,7 +23,7 @@ import freemarker.template.TemplateExceptionHandler;
  * @author yuanxx
  * @version $Id: App.java, v 0.1 2018年6月26日 下午7:56:48 yuanxx Exp $
  */
-public class App {
+public class AutoCodeTool {
 
     /**
      * 
@@ -36,7 +36,8 @@ public class App {
         /** 1.读取配置文件  */
         Properties properties = new Properties();
         // 使用ClassLoader加载properties配置文件生成对应的输入流
-        InputStream in = App.class.getClassLoader().getResourceAsStream("AutoCode.properties");
+        InputStream in = AutoCodeTool.class.getClassLoader().getResourceAsStream(
+            "AutoCode.properties");
         // 使用properties对象加载输入流
         properties.load(in);
 
@@ -53,13 +54,13 @@ public class App {
         dataMap.put("classPath", properties.get(AutoToolConstants.PACKAGE_NAME));
         dataMap.put("className", properties.get(AutoToolConstants.CLASS_NAME));
 
-        /** 获取模板  */
+        /** 7.获取模板  */
         Template template = cfg.getTemplate(AutoToolConstants.DAO_TEST_TEM_NAME);
 
-        /** 生成数据  */
+        /** 8.生成数据  */
         File docFile = new File(properties.getProperty(AutoToolConstants.STORE_PATH) + "\\"
                                 + properties.getProperty(AutoToolConstants.CLASS_NAME) + ".java");
-        /** 写出流  */
+        /** 9.写出流  */
         Writer out = null;
         out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(docFile)));
         template.process(dataMap, out);
