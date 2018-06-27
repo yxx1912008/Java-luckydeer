@@ -1,7 +1,3 @@
-/**
- * icaomei Inc.
- * Copyright (c) 2016-2016 All Rights Reserved.
- */
 package cn.luckydeer.common.utils.http;
 
 import java.io.File;
