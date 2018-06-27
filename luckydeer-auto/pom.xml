@@ -8,7 +8,9 @@
 	</parent>
 	<artifactId>luckydeer-auto</artifactId>
 	<name>luckydeer-auto</name>
-	<description>代码自动生成</description>
+	<description>代码自动生成工具
+此包打包时不用跟随项目打包进去
+只用于代码自动生成</description>
 
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
