@@ -89,9 +89,7 @@ public class DistributedCachedImpl extends AbstractTairCached {
 
         if (validateKey(key) && validateExp(exp) && validateValue(value)) {
             try {
-                /* cachedMap.get(cachedType.getCode()).set(key, exp, value);*/
-                MemcachedClient client = cachedMap.get(cachedType.getCode());
-                client.set(key, exp, value);
+                cachedMap.get(cachedType.getCode()).set(key, exp, value);
                 return true;
             } catch (Exception e) {
                 LOGGER.error("缓存内部系统异常,保存失败key=" + key, e);
