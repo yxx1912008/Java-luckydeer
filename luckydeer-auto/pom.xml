@@ -11,15 +11,6 @@
 	<description>代码自动生成</description>
 
 	<dependencies>
-
-		<!-- Ant自动构建工具 -->
-		<!-- https://mvnrepository.com/artifact/org.apache.ant/ant -->
-		<dependency>
-			<groupId>org.apache.ant</groupId>
-			<artifactId>ant</artifactId>
-			<version>1.8.4</version>
-		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
 		<dependency>
 			<groupId>org.freemarker</groupId>
