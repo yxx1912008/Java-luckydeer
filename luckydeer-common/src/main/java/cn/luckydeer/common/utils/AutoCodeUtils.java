@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 生成Code工具类

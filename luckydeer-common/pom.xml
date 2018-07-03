@@ -11,15 +11,6 @@
 
 
 	<dependencies>
-
-		<!-- HttpClient -->
-		<dependency>
-			<groupId>commons-httpclient</groupId>
-			<artifactId>commons-httpclient</artifactId>
-			<version>3.0</version>
-		</dependency>
-
-
 		<dependency>
 			<groupId>cn.luckydeer</groupId>
 			<artifactId>luckydeer-model</artifactId>
