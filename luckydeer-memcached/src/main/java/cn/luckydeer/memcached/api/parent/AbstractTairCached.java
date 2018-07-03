@@ -3,7 +3,7 @@ package cn.luckydeer.memcached.api.parent;
 import net.spy.memcached.KeyUtil;
 import net.spy.memcached.MemcachedClientIF;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

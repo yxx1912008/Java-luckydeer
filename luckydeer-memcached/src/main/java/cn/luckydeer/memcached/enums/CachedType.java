@@ -1,6 +1,6 @@
 package cn.luckydeer.memcached.enums;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * 

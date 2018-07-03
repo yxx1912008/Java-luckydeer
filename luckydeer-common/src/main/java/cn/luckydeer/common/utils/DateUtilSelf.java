@@ -9,7 +9,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * DateFormat不是线程安全的，不能作为这个util类的成员变量

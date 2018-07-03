@@ -6,7 +6,7 @@ import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.util.CollectionUtils;
 
 import cn.luckydeer.common.constants.ViewConstants;

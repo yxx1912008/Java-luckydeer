@@ -2,7 +2,7 @@ package cn.luckydeer.common.helper;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * 网络请求帮助类
