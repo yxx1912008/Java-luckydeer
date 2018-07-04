@@ -53,7 +53,7 @@
 				/sys/login=anon
 				/captcha.jpg=anon
 				/**/*.wx=anon
-				/**=authc
+				/**=anon
 			</value>
 		</property>
 	</bean>
