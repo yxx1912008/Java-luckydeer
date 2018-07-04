@@ -2,7 +2,7 @@
 layui.define(['layer', 'form'], function (exports) {
     var layer = layui.layer, form = layui.form;
     var device = layui.device();
-    layer.msg('首页');
+    layer.msg('页面正在加载中.....');
     exports('index', {});
 });
 

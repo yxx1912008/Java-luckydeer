@@ -6,16 +6,40 @@
     <title>首页</title>
     <link rel="stylesheet" href="layui/css/layui.css">
 </head>
+<!-- 让IE8/9支持媒体查询 -->
+<!--[if lt IE 9]>
+<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
 <body>
 
 <!-- 你的HTML代码 -->
+<div class="body">
+
+    表单
+    <hr>
+    <div class="layui-form">
+
+
+    </div>
+
+
+    <div class="layui-footer ">
+        <!-- 底部固定区域 -->
+        © luckydeer.com - 底部固定区域
+    </div>
+</div>
 
 <script src="layui/layui.js"></script>
 <script>
     /*配置加载模块*/
     layui.config({
         base: 'js/modules/' //你存放新模块的目录，注意，不是layui的模块目录
-    }).use('index'); //加载入口
+    }); //加载入口
+
+    layui.use('index');
+
 </script>
 </body>
 </html>
