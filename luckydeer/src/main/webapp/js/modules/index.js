@@ -6,10 +6,9 @@ layui.define(['layer', 'form'], function (exports) {
     /*加载层*/
     var loader = layer.load(2, {time: 10 * 1000});
 
-
     $.ajax({
         type: 'POST',
-        url: '/wechat/cat/getIndexPoster.wx',
+        url: 'wechat/cat/getIndexPoster.wx',
         success: function (msg) {
             var str = "";
             for (var i = 0; i < msg.data.length; i++) {
