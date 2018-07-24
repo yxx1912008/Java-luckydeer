@@ -44,7 +44,7 @@ public class UserInfoMessange {
     public void onOpen(@PathParam(value = "userId") String userId, Session session)
                                                                                    throws IOException {
         this.session = session;
-        System.out.println("连接ok");
+        System.out.println("websocket连接成功");
         this.userId = userId;
         userInfoMessanges.put(userId, this);
         addOnlineCount();
@@ -80,11 +80,13 @@ public class UserInfoMessange {
      * @param session
      * @param error
      * @author yuanxx @date 2018年7月24日
+     * @throws IOException 
      */
     @OnError
-    public void onError(Session session, Throwable error) {
+    public void onError(Session session, Throwable error) throws IOException {
         System.out.println("发生错误");
         error.printStackTrace();
+        session.getBasicRemote().sendText("未知错误");
     }
 
     /**
