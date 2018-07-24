@@ -22,3 +22,5 @@
 Webmagic爬虫工具，用于抓取信息
 测试用户Session缓存进Memcahed成功
 增加线程池工具
+2018年7月19日11：47：00
+前端框架 由 layui改造为 Vue 虽然layui很适合后端Java程序员，可是仍然有局限性。
