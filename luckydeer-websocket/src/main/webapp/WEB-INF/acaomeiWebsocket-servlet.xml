@@ -9,9 +9,13 @@
     http://www.springframework.org/schema/mvc   
     http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
-	<context:component-scan base-package="cn.luckydeer.websocket.*" />
+	<context:component-scan base-package="cn.luckydeer.websocket.controller.*" />
 
 	<mvc:annotation-driven />
+
+	<!-- 用户信息管理 -->
+	<!-- <bean id="userInfoManager" class="cn.luckydeer.websocket.manager.UserInfoManager" 
+		/> -->
 
 
 </beans>

@@ -3,13 +3,18 @@
 <head>
 <title>Java后端WebSocket的Tomcat实现</title>
 <script src="https://cdn.bootcss.com/moment.js/2.10.6/moment.min.js"></script>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
 </head>
 <body>
 	Welcome
 	<br />
-	<label>用户ID</label>
+	<label>用户昵称</label>
 	<input id="userId" type="text" />
 	<button onclick="setUserId()">开始连接</button>
+	<br />
+	<label>本桌桌号</label>
+	<input id="toTableNo" type="text" />
+	<br />
 	<br />
 	<label>对方ID</label>
 	<input id="toUserId" type="text" />
@@ -27,11 +32,14 @@
 
 	function setUserId() {
 		var userId = document.getElementById('userId').value;
+		var tableNo = document.getElementById('toTableNo').value;
+		var url = "ws://192.168.18.124:8080/luckydeer-websocket/websocket/"
+				+ encodeURIComponent(userId) + '/'
+				+ encodeURIComponent(tableNo);
+		console.log(url)
 		//判断当前浏览器是否支持WebSocket
 		if ('WebSocket' in window) {
-			websocket = new WebSocket(
-					"ws://localhost:8080/luckydeer-websocket/websocket/"
-							+ userId);
+			websocket = new WebSocket(url);
 		} else {
 			alert('当前浏览器 Not support websocket')
 			return;
@@ -81,10 +89,12 @@
 	function send() {
 		var toUserId = document.getElementById('toUserId').value;
 		var message = document.getElementById('text').value;
+		var toTableNo = document.getElementById('toTableNo').value;
 		const
 		msg = {
 			toUserId : toUserId,
-			message : message
+			message : message,
+			toTableNo : toTableNo
 		}
 		document.getElementById('message').innerHTML += moment().format(
 				'YYYY年MM月DD日 h:mm:ss a')
