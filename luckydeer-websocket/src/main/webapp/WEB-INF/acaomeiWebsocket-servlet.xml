@@ -14,8 +14,7 @@
 	<mvc:annotation-driven />
 
 	<!-- 用户信息管理 -->
-	<!-- <bean id="userInfoManager" class="cn.luckydeer.websocket.manager.UserInfoManager" 
-		/> -->
+<!-- 	<bean id="userInfoManager" class="cn.luckydeer.websocket.manager.UserInfoManager" /> -->
 
 
 </beans>

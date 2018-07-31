@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.luckydeer.websocket.enums.ViewShowEnums;
@@ -19,11 +18,11 @@ import cn.luckydeer.websocket.model.ResponseObj;
  * @version $Id: UserInfoController.java, v 0.1 2018年7月26日 上午10:49:46 yuanxx Exp $
  */
 @Controller
-@RequestMapping(value = "/websocket/user/", method = RequestMethod.POST)
+@RequestMapping(value = "/websocket/user/")
 public class UserInfoController {
 
-    /*    @Autowired
-        private UserInfoManager userInfoManager;*/
+    /*  @Autowired
+      private UserInfoManager userInfoManager;*/
 
     /**
      * 
