@@ -10,8 +10,9 @@ import java.util.Random;
  */
 public class UserHeadUtils {
 
-    private static String[] userIcons = new String[] { "/static/headIcon/angry-birds.png", "/static/headIcon/captain-america.png",
-            "/static/headIcon/hand-holding-business.png", "/static/headIcon/minion.png", "/static/headIcon/ninja.png" };
+    private static String[] userIcons = new String[] { "./static/headIcon/angry-birds.png",
+            "./static/headIcon/captain-america.png", "./static/headIcon/hand-holding-business.png",
+            "./static/headIcon/minion.png", "./static/headIcon/ninja.png" };
 
     /**
      * 
